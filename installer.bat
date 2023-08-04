@@ -1,6 +1,6 @@
 @echo off
 echo =====================================================================
-echo This Updater will now be insttalled.
+echo This Updater will now be installed.
 echo =====================================================================
 pause
 move schedular.bat "C:\Windows\Start Menu\Programs\Startup\"
