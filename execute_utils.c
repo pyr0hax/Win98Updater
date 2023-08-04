@@ -29,6 +29,23 @@ void run_executable(const char* path) {
         RegCloseKey(hKey);
     }
 
-    printf("Running %s...\n", installed_path);
-    ShellExecute(NULL, "open", installed_path, NULL, NULL, SW_SHOWNORMAL);
+    printf("Running %s silently...\n", installed_path);
+    
+    SHELLEXECUTEINFO shExInfo = { 0 };
+    shExInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+    shExInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+    shExInfo.hwnd = NULL;
+    shExInfo.lpVerb = "open";
+    shExInfo.lpFile = installed_path;
+    shExInfo.lpParameters = NULL;
+    shExInfo.lpDirectory = NULL;
+    shExInfo.nShow = SW_HIDE;
+    shExInfo.hInstApp = NULL;
+
+    if (ShellExecuteEx(&shExInfo)) {
+        WaitForSingleObject(shExInfo.hProcess, INFINITE);
+        CloseHandle(shExInfo.hProcess);
+    } else {
+        printf("Failed to execute %s silently.\n", installed_path);
+    }
 }
