@@ -9,6 +9,6 @@ move updater.exe C:\updater\
 pause
 echo =====================================================================
 echo Please note that the schedular will run each time on startup so you will have an annoying black box popping up. 
-echo It will check for updates.
+echo It will check for updates on every boot.
 echo =====================================================================
 pause
